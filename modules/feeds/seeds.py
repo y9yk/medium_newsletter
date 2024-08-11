@@ -16,6 +16,7 @@ class SeedDataManager(object):
 
         with open(filename, "r") as f:
             ret = f.read()
+            print(ret)
 
         import json
 
