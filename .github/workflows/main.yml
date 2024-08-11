@@ -27,7 +27,7 @@ jobs:
 
     - name: Set up Google Credentials
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ./credential/gcloud.json
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/credential/gcloud.json
       run: |
         echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" > $GOOGLE_APPLICATION_CREDENTIALS
       shell: bash
@@ -42,4 +42,6 @@ jobs:
       run: poetry install
 
     - name: Run tests or other commands
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/credential/gcloud.json
       run: poetry run python main.py --topics ${{ secrets.TOPICS }}

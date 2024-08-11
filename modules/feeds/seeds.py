@@ -1,3 +1,4 @@
+import os
 import gspread
 import pandas as pd
 
@@ -7,9 +8,14 @@ from modules.utils import logger
 
 class SeedDataManager(object):
     def __init__(self):
-        self.client = gspread.service_account(
-            filename=f"{settings.GOOGLE_SERVICE_ACCOUNT_FILEPATH}/{settings.GOOGLE_SERVICE_ACCOUNT_FILENAME}",
-        )
+        system_google_service_account_filename = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
+        if system_google_service_account_filename:
+            filename = system_google_service_account_filename
+        else:
+            filename = f"{settings.GOOGLE_SERVICE_ACCOUNT_FILEPATH}/{settings.GOOGLE_SERVICE_ACCOUNT_FILENAME}"
+
+        #
+        self.client = gspread.service_account(filename=filename)
 
     def get_seed_urls(self):
         worksheet = self.client.open(settings.SEED_FILENAME)
