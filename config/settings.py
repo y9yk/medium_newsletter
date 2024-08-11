@@ -44,9 +44,9 @@ class Settings(BaseSettings):
     EPSILON: int = 100
 
     # langfuse integration
-    # LANGFUSE_SECRET_KEY: str = ""
-    # LANGFUSE_PUBLIC_KEY: str = ""
-    # LANGFUSE_HOST: str = ""
+    LANGFUSE_SECRET_KEY: str = ""
+    LANGFUSE_PUBLIC_KEY: str = ""
+    LANGFUSE_HOST: str = ""
 
     MEDIUM_API_BASE_URL: str = "https://api.medium.com"
     MEDIUM_API_GET_USER_URL: str = "/v1/me"
