@@ -1,0 +1,78 @@
+idea
+.ipynb_checkpoints
+.mypy_cache
+.vscode
+__pycache__
+.pytest_cache
+htmlcov
+dist
+site
+.coverage
+coverage.xml
+.netlify
+test.db
+log.txt
+openai_sandbox/poetry.lock
+env3.*
+env
+docs_build
+site_build
+venv
+docs.zip
+archive.zip
+docker/db/data
+docker/db/conf.d
+docker/db/my.cnf
+
+# vim temporary files
+*~
+.*.sw?
+.cache
+
+# macOS
+.DS_Store
+
+# PyBuilder
+target/
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+venv/
+env.bak/
+venv.bak/
+env/.env.dev
+env/.env.prd
+.local.env
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+# idea
+.idea
+
+# resources
+resources/*
+!resources/template
+
+# notebooks
+notebooks
