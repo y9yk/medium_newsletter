@@ -14,8 +14,9 @@ from modules.post_processor import get_postproc
 
 
 class Processor(object):
-    def __init__(self, topics):
+    def __init__(self, topics, publish_status: str = "draft"):
         self.topics = topics
+        self.publish_status = publish_status
 
         # workers
         self.seed_data_manager = get_seed_data_manager()
@@ -91,6 +92,7 @@ class Processor(object):
                 title=title,
                 content=content,
                 tags=[settings.TAG],
+                publish_status=self.publish_status,
             )
 
             logger.debug(response)
