@@ -1,0 +1,45 @@
+[tool.poetry]
+authors = ["y9yk <yongki.lee@sk.com>"]
+description = ""
+name = "medium_newsletter"
+readme = "README.md"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+pydantic-settings = "^2.0.3"
+python = "^3.10"
+feedparser = "^6.0.11"
+gspread = "^6.1.2"
+loguru = "^0.7.2"
+aiohttp = "^3.10.2"
+async-timeout = "^4.0.3"
+langchain-openai = "^0.1.20"
+pytz = "^2024.1"
+json-repair = "^0.27.0"
+markdown = "^3.6"
+langfuse = "^2.43.1"
+langchain = "^0.2.12"
+tiktoken = "^0.7.0"
+pandas = "^2.2.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+isort = "^5.12.0"
+jupyter = "^1.0.0"
+makefile = "^1.1.0"
+pre-commit = "^3.5.0"
+
+[tool.black]
+line-length = 120
+target-version = ["py38"]
+
+[tool.isort]
+include_trailing_comma = true
+multi_line_output = 3
+py_version = 38
+skip = ["__init__.py"]
+skip_glob = ["resources/*"]
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
