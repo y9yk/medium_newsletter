@@ -156,9 +156,8 @@ class TechNewsGenerator(object):
                 timeout=settings.TECHNEWS_GENERATOR_TIMEOUT,
             )
             return ret
-        except Exception as e:
-            if settings.DEBUG:
-                traceback.print_exc()
+        except:
+            traceback.print_exc()
             return []
 
 
