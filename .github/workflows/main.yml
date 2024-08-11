@@ -25,6 +25,11 @@ jobs:
         echo "DEBUG=${{ secrets.DEBUG }}" >> .env
       shell: bash
 
+    - name: Create Google Services JSON File
+      env:
+        GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+      run: echo $GOOGLE_SERVICES_JSON | base64 -di > ./credential/gcloud.json
+
     - name: Install Poetry
       run: |
         curl -sSL https://install.python-poetry.org | python3 -
@@ -36,6 +41,5 @@ jobs:
 
     - name: Run tests or other commands
       run: |
-        export GOOGLE_APPLICATION_CREDENTIALS=$(echo ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }} | base64)
         poetry run python main.py --topics ${{ secrets.TOPICS }}
       shell: bash
