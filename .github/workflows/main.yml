@@ -1,0 +1,45 @@
+name: Docker image build and push to gcp
+
+on:
+  push:
+    branches: [ master ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Create .env file
+      run: |
+        echo "MEDIUM_ACCESS_TOKEN=${{ secrets.MEDIUM_ACCESS_TOKEN }}" >> .env
+        echo "OPENAI_MODEL_NAME=${{ secrets.OPENAI_MODEL_NAME }}" >> .env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+        echo "DEBUG=${{ secrets.DEBUG }}" >> .env
+      shell: bash
+
+    - name: Set up Google Credentials
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/credential/gcloud.json
+      run: |
+        echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" > $GOOGLE_APPLICATION_CREDENTIALS
+      shell: bash
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+      shell: bash
+
+    - name: Install dependencies
+      run: poetry install
+
+    - name: Run tests or other commands
+      run: poetry run python main.py --topics ${{ secrets.TOPICS }}
