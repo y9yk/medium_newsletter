@@ -61,8 +61,13 @@ $ make install-pre-commit
 
 ## Execution Program
 
+- ./sbin.run.sh 스크립트를 통해 실행할 수 있습니다.
+- 넘겨야 하는 argument는 아래 2가지 입니다.
+  - topics: 해당 topics과 관련이 있는 글들만 피드에서 수집하여 요약합니다. comma separator로 구분합니다. (e.g., AI, Machine Learning)
+  - publish_status: 미디엄에 게재할 상태를 의미합니다. `public, draft, unlisted` 세 가지 옵션이 있습니다.
+
 ```bash
-$ ./sbin/run.sh AI
+$ ./sbin/run.sh AI draft
 -----------------------------------------
 CURR_DIR: /Users/y9yk/dev/medium_newsletter/sbin
 PROJECT_ROOT: /Users/y9yk/dev/medium_newsletter

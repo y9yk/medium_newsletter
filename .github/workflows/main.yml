@@ -41,5 +41,5 @@ jobs:
 
     - name: Run tests or other commands
       run: |
-        poetry run python main.py --topics ${{ secrets.TOPICS }}
+        poetry run python main.py --topics ${{ secrets.TOPICS }} --publish_status ${{ secrets.PUBLISH_STATUS }}
       shell: bash
