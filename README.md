@@ -51,7 +51,7 @@ $ make install-pre-commit
 
 **!important Google Spreadsheet와 연결되어야, 프로그램을 수행할 수 있습니다.**
 
-- https://docs.gspread.org/en/latest/oauth2.html을 참고하세요.
+- https://docs.gspread.org/en/latest/oauth2.html
 - Google Drive API가 사용 가능한 상태가 되어야 합니다.
 - credential은 ./credential/gcloud.json의 이름으로 저장되어야 합니다.
 - 미리 만들어져야 하는 Google Spreadsheet의 파일명은 다음과 같습니다.
