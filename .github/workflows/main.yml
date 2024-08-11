@@ -27,7 +27,7 @@ jobs:
 
     - name: Set up Google Credentials
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/credential/gcloud.json
+        GOOGLE_APPLICATION_CREDENTIALS: credential/gcloud.json
       run: |
         echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" > $GOOGLE_APPLICATION_CREDENTIALS
       shell: bash
