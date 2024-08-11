@@ -1,6 +1,8 @@
 name: Build, Create Post and Publish it
 
 on:
+  schedule:
+    - cron: '0 0 * * *'
   push:
     branches: [ main ]
     
