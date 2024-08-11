@@ -1,27 +1,22 @@
 import os
+import base64
+import tempfile
 import gspread
 import pandas as pd
 
 from config import settings
-from modules.utils import logger
 
 
 class SeedDataManager(object):
     def __init__(self):
-        system_google_service_account_filename = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
-        if system_google_service_account_filename:
-            filename = system_google_service_account_filename
+        system_google_service_account = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
+        if system_google_service_account:
+            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                system_google_service_account = base64.b64decode(system_google_service_account)
+                temp_file.write(system_google_service_account)
+            filename = temp_file.name
         else:
             filename = f"{settings.GOOGLE_SERVICE_ACCOUNT_FILEPATH}/{settings.GOOGLE_SERVICE_ACCOUNT_FILENAME}"
-
-        with open(filename, "r") as f:
-            ret = f.read()
-            print(ret)
-
-        import json
-
-        ret = json.loads(ret)
-        print(ret)
 
         #
         self.client = gspread.service_account(filename=filename)
