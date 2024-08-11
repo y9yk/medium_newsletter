@@ -14,6 +14,14 @@ class SeedDataManager(object):
         else:
             filename = f"{settings.GOOGLE_SERVICE_ACCOUNT_FILEPATH}/{settings.GOOGLE_SERVICE_ACCOUNT_FILENAME}"
 
+        with open(filename, "r") as f:
+            ret = f.read()
+
+        import json
+
+        ret = json.loads(ret)
+        print(ret)
+
         #
         self.client = gspread.service_account(filename=filename)
 

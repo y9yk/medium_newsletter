@@ -29,7 +29,7 @@ jobs:
       env:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/gcloud.json
       run: |
-        echo ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }} > $GOOGLE_APPLICATION_CREDENTIALS
+        echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}" > $GOOGLE_APPLICATION_CREDENTIALS
       shell: bash
 
     - name: Install Poetry
