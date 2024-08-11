@@ -54,7 +54,7 @@ class Settings(BaseSettings):
     INTRODUCTION_CONTENT_TYPE: str = "introduction"
     MAIN_BODY_CONTENT_TYPE: str = "main_body"
     TITLE_CONTENT_TYPE: str = "title"
-    TAG: str = "technews"
+    TAG: str = "y9yk-technews"
 
     SAMPLE_K: int = 10
 
