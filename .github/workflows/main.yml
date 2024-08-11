@@ -19,10 +19,10 @@ jobs:
 
     - name: Create .env file
       run: |
-        echo "MEDIUM_ACCESS_TOKEN=${{ secrets.MEDIUM_ACCESS_TOKEN }}" >> .env
-        echo "OPENAI_MODEL_NAME=${{ secrets.OPENAI_MODEL_NAME }}" >> .env
-        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
-        echo "DEBUG=${{ secrets.DEBUG }}" >> .env
+        echo "MEDIUM_ACCESS_TOKEN=${{ secrets.MEDIUM_ACCESS_TOKEN }}" >> ./config/.env
+        echo "OPENAI_MODEL_NAME=${{ secrets.OPENAI_MODEL_NAME }}" >> ./config/.env
+        echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> ./config/.env
+        echo "DEBUG=${{ secrets.DEBUG }}" >> ./config/.env
       shell: bash
 
     - name: Create Google Services JSON File
