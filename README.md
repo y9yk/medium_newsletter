@@ -13,18 +13,31 @@
 | pragmaticeengineer | https://blog.pragmaticengineer.com/rss/      |
 
 
+더불어 위의 기술 뉴스 피드들이 게재되고 있는 미디엄 주소는 다음과 같습니다.
+
+- https://medium.com/tag/y9yk-technews
+
 ---
+
+# Architecture
+
+medium_newsletter의 Architecture는 아래와 같습니다.
+
+![Architecture](./Architecture.png)
+
 
 # Getting Started
 
 ## Prerequisites
+
+프로그램을 실행하기 위해 설치해야 하는 소프트웨어들은 다음과 같습니다.
 
 - poetry
 - virtualenv (pyenv, python 3.10)
 
 ## Local Development
 
-로컬에서 개발하기 위한 환경 구성은 아래와 같습니다.
+로컬 환경에서 개발 및 실행하기 위한 환경 구성은 아래와 같습니다.
 
 ### Install Dependencies
 
@@ -47,17 +60,68 @@ $ make install-pre-commit
 | OPENAI_API_KEY      | 사용되는 모델 키                      |
 | DEBUG               | 디버깅 여부 (e.g., True/False)      |
 
+### Create Google Service Account and Get Google Application Credentials
+
+프로그램을 실행하기 위해서는 Google Application Credentials가 있어야 하며, 해당 Credential은 Google Drive API 사용 권한이 있어야 합니다.
+
+Google Application Credentials는 Google API에 접근하여 데이터를 인증하고 권한을 부여받기 위해 인간이 아닌 사용자(예: 애플리케이션)를 나타내도록 설계된 특별한 유형의 Google 계정입니다.
+
+서비스 계정은 별도의 계정이므로, 기본적으로 이 계정은 해당 스프레드시트에 접근할 수 없습니다. 다른 Google 계정과 마찬가지로 해당 계정에 스프레드시트를 공유해야 접근할 수 있습니다.
+
+서비스 계정을 생성하는 방법은 다음과 같습니다:
+
+- 1. 프로젝트에 대해 API 액세스를 활성화합니다(아직 하지 않았다면).
+- 2. "APIs & Services > Credentials"로 이동하여 "Create credentials > Service account key"를 선택합니다.
+- 3. 양식을 작성합니다.
+- 4. "Create"를 클릭한 후 "Done"을 클릭합니다.
+- 5. "Service Accounts" 위에 있는 "Manage service accounts"를 클릭합니다.
+- 6. 최근에 생성된 서비스 계정 옆에 있는 ⋮ 버튼을 누르고 "Manage keys"를 선택한 다음 "ADD KEY > Create new key"를 클릭합니다.
+- 7. JSON 키 유형을 선택하고 "Create"를 클릭합니다.
+- 8. 자동으로 자격 증명이 포함된 JSON 파일이 다운로드됩니다. 해당 파일은 다음과 비슷한 형태일 수 있습니다:
+
+```json
+{
+    "type": "service_account",
+    "project_id": "api-project-XXX",
+    "private_key_id": "2cd … ba4",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nNrDyLw … jINQh/9\n-----END PRIVATE KEY-----\n",
+    "client_email": "473000000000-yoursisdifferent@developer.gserviceaccount.com",
+    "client_id": "473 … hd.apps.googleusercontent.com",
+    ...
+}
+```
+
+ - 9. 마지막으로 다운받은 JSON 파일을 `./credential/gcloud.json`으로 저장해주세요.
+
 ### Connect to Google Drive
 
-**!important Google Spreadsheet와 연결되어야, 프로그램을 수행할 수 있습니다.**
+**!Important**
 
-- https://docs.gspread.org/en/latest/oauth2.html
-- Google Drive API가 사용 가능한 상태가 되어야 합니다.
-- credential은 ./credential/gcloud.json의 이름으로 저장되어야 합니다.
-- 미리 만들어져야 하는 Google Spreadsheet의 파일명은 다음과 같습니다.
-  - awesome_research_sites: 기술 피드 목록을 저장합니다.
-  - reading_list
-  - title_list
+프로그램을 수행하기 위해서는 아래의 Google Spreadsheet를 구성하고, 위에서 생성한 Google Application Credentials 내 `client_email`과 공유 설정이 되어있어야 합니다.
+
+먼저, 생성되어야 하는 Google Spreadsheet는 다음과 같습니다.
+
+
+| Google Spreadsheet     | 설명                                                     |
+|------------------------|--------------------------------------------------------|
+| awesome_research_sites | 수집해야 하는 기술 뉴스 피드 리스트가 있는 Google Spreadsheet            |
+| reading_list           | 미디엄 포스트 생성에 사용된 피드 내 포스트들과 날짜를 기록하는 Google Spreadsheet |
+| title_list             | 미디엄 포스트를 생성할 때 사용되었던 타이틀과 날짜를 기록하는 Google Spreadsheet  |
+
+각 Spreadsheet의 예시는 다음과 같습니다.
+
+#### awesom_research_sites
+
+![awesome_research_sites](./awesome_research_sites.png)
+
+#### reading_list
+
+![reading_list](./reading_list.png)
+
+#### title_list
+
+![title_list](./title_list.png)
+
 
 ## Execution Program
 
